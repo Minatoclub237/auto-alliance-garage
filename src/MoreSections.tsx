@@ -69,44 +69,6 @@ export function MarqueeSection() {
   )
 }
 
-/* ===================== PROCESS EN 4 ÉTAPES ===================== */
-const STEPS = [
-  { n: '01', t: 'Prenez rendez-vous', d: 'Par téléphone ou via le formulaire, choisissez le créneau qui vous arrange.' },
-  { n: '02', t: 'Diagnostic & devis', d: 'On inspecte, on vous explique, on chiffre — gratuitement et clairement.' },
-  { n: '03', t: 'Réparation', d: 'Nos techniciens Eurorepar interviennent avec des pièces de qualité.' },
-  { n: '04', t: 'Restitution', d: 'Véhicule contrôlé, propre et prêt à rouler. Garantie constructeur préservée.' },
-]
-
-export function ProcessSection() {
-  return (
-    <section id="process" className="scroll-mt-24 bg-[#0a0a0a] text-white py-24 sm:py-32 px-6">
-      <div className="max-w-6xl mx-auto">
-        <Reveal>
-          <p className="font-script text-3xl mb-1" style={{ color: ACCENT }}>
-            Simple et transparent
-          </p>
-          <h2 className="font-anton uppercase text-4xl sm:text-6xl leading-[0.95] max-w-2xl">
-            Comment ça se passe
-          </h2>
-        </Reveal>
-        <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-white/10 rounded-3xl overflow-hidden border border-white/10">
-          {STEPS.map((s, i) => (
-            <Reveal key={s.n} delay={i * 90} className="h-full">
-              <div className="bg-[#0a0a0a] p-8 h-full hover:bg-white/[0.03] transition-colors">
-                <span className="font-anton text-5xl" style={{ color: ACCENT }}>
-                  {s.n}
-                </span>
-                <h3 className="mt-4 text-lg font-semibold">{s.t}</h3>
-                <p className="mt-2 text-sm text-white/55 leading-relaxed">{s.d}</p>
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
 /* ===================== CARROSSERIE AVANT / APRÈS ===================== */
 export function CarrosserieSection() {
   const [pos, setPos] = useState(50)

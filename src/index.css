@@ -177,8 +177,14 @@ body {
 #veldara .rubrique[data-side='right'] {
   justify-content: flex-end;
 }
+#veldara .rubrique[data-side='center'] {
+  justify-content: center;
+}
 #veldara .rubrique-inner {
   width: min(100%, 30rem);
+}
+#veldara .rubrique[data-side='center'] .rubrique-inner.rubrique-wide {
+  width: min(100%, 52rem);
 }
 #veldara .rubriques-spacer {
   position: relative;

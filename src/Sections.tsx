@@ -243,6 +243,40 @@ export function AvisPanel2() {
   )
 }
 
+/* ===================== RUBRIQUE : PROCESS (centré) ===================== */
+const STEPS = [
+  { n: '01', t: 'Prenez rendez-vous', d: 'Par téléphone ou via le formulaire, au créneau qui vous arrange.' },
+  { n: '02', t: 'Diagnostic & devis', d: 'On inspecte, on explique, on chiffre — gratuitement et clairement.' },
+  { n: '03', t: 'Réparation', d: 'Nos techniciens Eurorepar interviennent avec des pièces de qualité.' },
+  { n: '04', t: 'Restitution', d: 'Véhicule contrôlé, propre et prêt. Garantie constructeur préservée.' },
+]
+
+export function ProcessPanel() {
+  return (
+    <div className="rubrique" data-side="center">
+      <div className="rubrique-inner rubrique-wide bg-black/35 backdrop-blur-md border border-white/10 rounded-3xl p-8 sm:p-10">
+        <p className="font-script text-3xl mb-1 text-center" style={{ color: ACCENT }}>
+          Simple et transparent
+        </p>
+        <h2 className="font-anton uppercase text-4xl sm:text-5xl leading-[0.95] text-center mb-8">
+          Comment ça se passe
+        </h2>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
+          {STEPS.map((s) => (
+            <div key={s.n}>
+              <span className="font-anton text-4xl" style={{ color: ACCENT }}>
+                {s.n}
+              </span>
+              <h3 className="mt-2 text-base font-semibold">{s.t}</h3>
+              <p className="mt-1 text-xs text-white/60 leading-relaxed">{s.d}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 /* ===================== CONTACT / FOOTER ===================== */
 export function GarageFooter() {
   return (

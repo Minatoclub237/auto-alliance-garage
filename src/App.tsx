@@ -4,7 +4,6 @@ import VeldaraSection from './Veldara'
 import { GarageFooter } from './Sections'
 import {
   MarqueeSection,
-  ProcessSection,
   CarrosserieSection,
   PourquoiSection,
   FaqSection,
@@ -330,7 +329,6 @@ entre de bonnes mains
 
       <VeldaraSection onSection={setActive} />
 
-      <ProcessSection />
       <MarqueeSection />
       <CarrosserieSection />
       <PourquoiSection />
