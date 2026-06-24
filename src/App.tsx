@@ -330,8 +330,8 @@ entre de bonnes mains
 
       <VeldaraSection onSection={setActive} />
 
-      <MarqueeSection />
       <ProcessSection />
+      <MarqueeSection />
       <CarrosserieSection />
       <PourquoiSection />
       <FaqSection />
