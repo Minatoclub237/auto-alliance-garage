@@ -211,6 +211,38 @@ export function AvisPanel() {
   )
 }
 
+/* ===================== RUBRIQUE : AVIS 2 (droite) ===================== */
+export function AvisPanel2() {
+  return (
+    <div className="rubrique" data-side="right">
+      <div className="rubrique-inner bg-black/35 backdrop-blur-md border border-white/10 rounded-3xl p-8">
+        <p className="font-script text-3xl mb-1" style={{ color: ACCENT }}>
+          Encore un mot
+        </p>
+        <h2 className="font-anton uppercase text-4xl sm:text-5xl leading-[0.95] mb-5">
+          Transparence totale
+        </h2>
+        <Stars value={5} size={18} />
+        <blockquote className="mt-4 text-sm text-white/80 leading-relaxed border-l-2 pl-4" style={{ borderColor: ACCENT }}>
+          “Devis clair, aucune surprise sur la facture. On m'a même montré les
+          pièces usées avant de les changer. Du vrai sérieux, je reviendrai.”
+        </blockquote>
+        <figcaption className="mt-3 text-xs text-white/45">
+          Client Google · Avis vérifié
+        </figcaption>
+        <a
+          href={MAPS_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-5 inline-flex items-center gap-2 text-sm text-white/85 hover:text-white transition-colors"
+        >
+          Voir tous les avis <ArrowRight size={16} />
+        </a>
+      </div>
+    </div>
+  )
+}
+
 /* ===================== CONTACT / FOOTER ===================== */
 export function GarageFooter() {
   return (

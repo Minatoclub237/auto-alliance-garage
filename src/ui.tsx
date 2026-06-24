@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
+import { Wrench } from 'lucide-react'
 
 export const ACCENT = '#e23b2e'
 export const ACCENT_DARK = '#c52f24'
@@ -144,36 +145,34 @@ export function Magnetic({
   )
 }
 
-/* Custom cursor: a dot that tracks 1:1 and a ring that eases behind it. */
+/* Custom cursor: a wrench that eases toward the pointer and grows on hover. */
 export function CustomCursor() {
-  const dotRef = useRef<HTMLDivElement>(null)
-  const ringRef = useRef<HTMLDivElement>(null)
+  const ref = useRef<HTMLDivElement>(null)
   useEffect(() => {
     if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return
-    const dot = dotRef.current!
-    const ring = ringRef.current!
+    const el = ref.current!
     let mx = -100
     let my = -100
-    let rx = -100
-    let ry = -100
+    let cx = -100
+    let cy = -100
+    let scale = 1
+    let targetScale = 1
     let raf = 0
     const onMove = (e: MouseEvent) => {
       mx = e.clientX
       my = e.clientY
-      dot.style.transform = `translate(${mx}px, ${my}px)`
     }
     const onOver = (e: MouseEvent) => {
       const t = e.target as HTMLElement
-      if (t.closest('a, button, input, textarea, select, [data-cursor]')) {
-        ring.classList.add('cursor-grow')
-      } else {
-        ring.classList.remove('cursor-grow')
-      }
+      targetScale = t.closest('a, button, input, textarea, select, [data-cursor]')
+        ? 1.45
+        : 1
     }
     const loop = () => {
-      rx += (mx - rx) * 0.18
-      ry += (my - ry) * 0.18
-      ring.style.transform = `translate(${rx}px, ${ry}px)`
+      cx += (mx - cx) * 0.22
+      cy += (my - cy) * 0.22
+      scale += (targetScale - scale) * 0.2
+      el.style.transform = `translate(${cx}px, ${cy}px) rotate(-22deg) scale(${scale})`
       raf = requestAnimationFrame(loop)
     }
     window.addEventListener('mousemove', onMove)
@@ -188,9 +187,8 @@ export function CustomCursor() {
     }
   }, [])
   return (
-    <>
-      <div ref={ringRef} className="cursor-ring" aria-hidden />
-      <div ref={dotRef} className="cursor-dot" aria-hidden />
-    </>
+    <div ref={ref} className="cursor-wrench" aria-hidden>
+      <Wrench size={26} strokeWidth={2.4} />
+    </div>
   )
 }

@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
-import { EntretienPanel, TarifsPanel, AvisPanel } from './Sections'
+import { EntretienPanel, TarifsPanel, AvisPanel, AvisPanel2 } from './Sections'
 
-const PANEL_IDS = ['entretien', 'tarifs', 'avis']
+const PANEL_IDS = ['entretien', 'tarifs', 'avis', 'avis2']
 const PANEL_COUNT = PANEL_IDS.length
 
 // Scroll-progress of each panel's peak, with a lead-in and a tail so the last
@@ -322,6 +322,7 @@ export default function VeldaraSection({
         <EntretienPanel />
         <TarifsPanel />
         <AvisPanel />
+        <AvisPanel2 />
       </div>
 
       {/* Scroll distance that drives the video scrub + rubriques */}

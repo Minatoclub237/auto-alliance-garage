@@ -219,37 +219,16 @@ body {
 }
 
 /* Custom cursor */
-.cursor-dot,
-.cursor-ring {
+.cursor-wrench {
   position: fixed;
   top: 0;
   left: 0;
-  border-radius: 9999px;
-  pointer-events: none;
+  margin: -13px 0 0 -13px;
   z-index: 9999;
-}
-.cursor-dot {
-  width: 6px;
-  height: 6px;
-  margin: -3px 0 0 -3px;
-  background: #e23b2e;
-}
-.cursor-ring {
-  width: 34px;
-  height: 34px;
-  margin: -17px 0 0 -17px;
-  border: 1.5px solid rgba(226, 59, 46, 0.55);
-  transition:
-    width 0.2s ease,
-    height 0.2s ease,
-    margin 0.2s ease,
-    background 0.2s ease;
-}
-.cursor-ring.cursor-grow {
-  width: 54px;
-  height: 54px;
-  margin: -27px 0 0 -27px;
-  background: rgba(226, 59, 46, 0.12);
+  pointer-events: none;
+  color: #e23b2e;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.55));
+  will-change: transform;
 }
 body.has-custom-cursor {
   cursor: none;
@@ -264,8 +243,7 @@ body.has-custom-cursor select {
   cursor: auto;
 }
 @media (hover: none), (pointer: coarse) {
-  .cursor-dot,
-  .cursor-ring {
+  .cursor-wrench {
     display: none;
   }
 }
