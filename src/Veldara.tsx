@@ -159,10 +159,11 @@ export default function VeldaraSection({
       const n = els.length
       if (n === 0) return 'entretien'
       const spacing = n > 1 ? (1 - LEAD - TAIL) / (n - 1) : 1
-      // Trapezoidal visibility: stay fully visible across `hold`, then fade
-      // over `edge` — so each rubrique lingers instead of just peaking.
-      const hold = spacing * 0.4
-      const edge = spacing * 0.55
+      // Trapezoidal visibility: fully visible across `hold`, then a short fade
+      // over `edge`. hold + edge stays UNDER spacing/2 so a rubrique is fully
+      // gone before the next appears — no two cards on screen at once.
+      const hold = spacing * 0.36
+      const edge = spacing * 0.12
       let maxOp = 0
       let maxIdx = 0
       for (let i = 0; i < n; i++) {
@@ -181,7 +182,7 @@ export default function VeldaraSection({
           maxIdx = i
         }
       }
-      return PANEL_IDS[maxIdx]
+      return maxOp > 0.05 ? PANEL_IDS[maxIdx] : null
     }
 
     function mainTick() {
@@ -192,7 +193,7 @@ export default function VeldaraSection({
       // out with the video as the footer scrolls in — no bleed-over.
       if (panelsRef.current) panelsRef.current.style.opacity = String(opacity)
       const dominant = updateRubriques(progress)
-      if (opacity > 0.05 && dominant !== lastSection) {
+      if (opacity > 0.05 && dominant && dominant !== lastSection) {
         lastSection = dominant
         onSection?.('#' + dominant)
       }
