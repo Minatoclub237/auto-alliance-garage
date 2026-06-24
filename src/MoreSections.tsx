@@ -23,18 +23,19 @@ const AFTER_IMG =
 
 /* ===================== MARQUEE DES MARQUES ===================== */
 const BRANDS = [
-  'Renault',
-  'Peugeot',
-  'Citroën',
-  'BMW',
-  'Audi',
-  'Volkswagen',
-  'Mercedes',
-  'Toyota',
-  'Ford',
-  'Opel',
-  'Dacia',
-  'Fiat',
+  { slug: 'renault', name: 'Renault' },
+  { slug: 'peugeot', name: 'Peugeot' },
+  { slug: 'citroen', name: 'Citroën' },
+  { slug: 'bmw', name: 'BMW' },
+  { slug: 'audi', name: 'Audi' },
+  { slug: 'volkswagen', name: 'Volkswagen' },
+  { slug: 'toyota', name: 'Toyota' },
+  { slug: 'ford', name: 'Ford' },
+  { slug: 'opel', name: 'Opel' },
+  { slug: 'dacia', name: 'Dacia' },
+  { slug: 'fiat', name: 'Fiat' },
+  { slug: 'skoda', name: 'Škoda' },
+  { slug: 'nissan', name: 'Nissan' },
 ]
 
 export function MarqueeSection() {
@@ -43,9 +44,14 @@ export function MarqueeSection() {
       <div className="marquee">
         <div className="marquee-track">
           {[...BRANDS, ...BRANDS].map((b, i) => (
-            <span key={i} className="marquee-item font-anton uppercase">
-              {b}
-            </span>
+            <img
+              key={i}
+              src={`/brands/${b.slug}.svg`}
+              alt={b.name}
+              className="marquee-logo"
+              loading="lazy"
+              draggable={false}
+            />
           ))}
         </div>
       </div>
