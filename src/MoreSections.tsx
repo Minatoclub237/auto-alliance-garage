@@ -36,6 +36,16 @@ const BRANDS = [
   { slug: 'fiat', name: 'Fiat' },
   { slug: 'skoda', name: 'Škoda' },
   { slug: 'nissan', name: 'Nissan' },
+  { slug: 'honda', name: 'Honda' },
+  { slug: 'hyundai', name: 'Hyundai' },
+  { slug: 'mazda', name: 'Mazda' },
+  { slug: 'volvo', name: 'Volvo' },
+  { slug: 'suzuki', name: 'Suzuki' },
+  { slug: 'jeep', name: 'Jeep' },
+  { slug: 'mini', name: 'MINI' },
+  { slug: 'porsche', name: 'Porsche' },
+  { slug: 'seat', name: 'SEAT' },
+  { slug: 'subaru', name: 'Subaru' },
 ]
 
 export function MarqueeSection() {

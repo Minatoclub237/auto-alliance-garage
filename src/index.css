@@ -277,29 +277,32 @@ body.has-custom-cursor select {
 }
 .marquee-track {
   display: flex;
-  gap: 4rem;
-  padding-right: 4rem;
+  align-items: center;
+  gap: 1.75rem;
+  padding-right: 1.75rem;
   white-space: nowrap;
-  animation: marqueeScroll 32s linear infinite;
+  animation: marqueeScroll 45s linear infinite;
 }
 .marquee-item {
   font-size: 1.6rem;
   color: rgba(255, 255, 255, 0.22);
 }
 .marquee-logo {
-  height: 34px;
+  height: 30px;
   width: auto;
   flex: 0 0 auto;
-  /* Render the brand mark as a muted white silhouette… */
-  filter: brightness(0) invert(1);
-  opacity: 0.45;
-  transition: opacity 0.3s ease, filter 0.3s ease;
+  /* Original brand colours, sat on a white tile so dark marks stay visible. */
+  background: #fff;
+  padding: 13px 20px;
+  border-radius: 14px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  opacity: 0.9;
+  transition: opacity 0.3s ease, transform 0.3s ease;
   user-select: none;
 }
 .marquee-logo:hover {
-  /* …then reveal its real brand colour on hover. */
-  filter: none;
   opacity: 1;
+  transform: translateY(-3px);
 }
 .marquee:hover .marquee-track {
   animation-play-state: paused;
