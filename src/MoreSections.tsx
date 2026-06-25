@@ -298,12 +298,12 @@ export function RdvSection() {
               </Magnetic>
             </div>
           ) : (
-            <form onSubmit={onSubmit} className="grid sm:grid-cols-2 gap-4">
-              <input required placeholder="Nom" className="form-field" />
-              <input required type="tel" placeholder="Téléphone" className="form-field" />
-              <input type="email" placeholder="Email (facultatif)" className="form-field sm:col-span-2" />
-              <input placeholder="Véhicule (marque, modèle)" className="form-field sm:col-span-2" />
-              <select required defaultValue="" className="form-field sm:col-span-2">
+            <form onSubmit={onSubmit} className="grid sm:grid-cols-2 gap-4" aria-label="Prise de rendez-vous">
+              <input required name="nom" aria-label="Nom" placeholder="Nom" className="form-field" />
+              <input required name="tel" type="tel" aria-label="Téléphone" placeholder="Téléphone" className="form-field" />
+              <input name="email" type="email" aria-label="Email (facultatif)" placeholder="Email (facultatif)" className="form-field sm:col-span-2" />
+              <input name="vehicule" aria-label="Véhicule (marque, modèle)" placeholder="Véhicule (marque, modèle)" className="form-field sm:col-span-2" />
+              <select required name="prestation" aria-label="Prestation souhaitée" defaultValue="" className="form-field sm:col-span-2">
                 <option value="" disabled>
                   Prestation souhaitée…
                 </option>
@@ -314,6 +314,8 @@ export function RdvSection() {
                 ))}
               </select>
               <textarea
+                name="message"
+                aria-label="Votre message (facultatif)"
                 placeholder="Votre message (facultatif)"
                 rows={3}
                 className="form-field sm:col-span-2 resize-none"

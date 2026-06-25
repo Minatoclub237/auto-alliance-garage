@@ -257,8 +257,11 @@ export default function App() {
       className="min-h-screen bg-white tracking-[-0.02em]"
       style={{ fontFamily: "'Inter', sans-serif" }}
     >
+      <a href="#accueil" className="skip-link">Aller au contenu</a>
+
       <Nav active={active} />
 
+      <main id="main">
       <section
         id="accueil"
         className="relative w-full overflow-hidden h-screen bg-black"
@@ -331,6 +334,7 @@ entre de bonnes mains
         <FaqSection />
         <RdvSection />
       </VideoScrollRegion>
+      </main>
 
       <GarageFooter />
 
