@@ -180,7 +180,7 @@ export function AvisPanel() {
           <span className="font-anton text-6xl leading-none">4,6</span>
           <div className="pb-1">
             <Stars value={4.6} size={20} />
-            <p className="mt-1 text-sm text-white/65">179 avis Google</p>
+            <p className="mt-1.5 spec-label">179 avis Google</p>
           </div>
         </div>
         <div className="flex flex-wrap gap-2 mb-5">
@@ -227,7 +227,7 @@ export function AvisPanel2() {
           “Devis clair, aucune surprise sur la facture. On m'a même montré les
           pièces usées avant de les changer. Du vrai sérieux, je reviendrai.”
         </blockquote>
-        <figcaption className="mt-3 text-xs text-white/45">
+        <figcaption className="mt-3 spec-label spec-label--tick">
           Client Google · Avis vérifié
         </figcaption>
         <a

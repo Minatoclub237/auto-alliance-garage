@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Dancing+Script:wght@500;600;700&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@1,400;1,500;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Dancing+Script:wght@500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@500;600&family=Playfair+Display:ital,wght@1,400;1,500;1,600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -58,6 +58,45 @@ body {
 
 .font-script {
   font-family: 'Dancing Script', cursive;
+}
+
+/* ===== "Spec label" — unique technical/instrument micro-typography for the
+   small subtitle/label text on cards (mono, tracked caps, red accent tick). */
+.spec-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.62);
+  font-variant-numeric: tabular-nums;
+}
+/* inline variant with a leading red tick (left-aligned meta labels) */
+.spec-label--tick {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.spec-label--tick::before {
+  content: '';
+  width: 14px;
+  height: 1.5px;
+  background: #e23b2e;
+  flex: none;
+}
+/* short red rule that sits between a KPI number and its label */
+.kpi-rule {
+  width: 22px;
+  height: 2px;
+  border-radius: 2px;
+  background: #e23b2e;
+  margin: 0.6rem auto 0.55rem;
+}
+/* refined card description (the "subtitle" body under a card title) */
+.card-sub {
+  font-size: 0.82rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.62);
 }
 
 /* Hero framing: on mobile (portrait), a square image only shows a vertical

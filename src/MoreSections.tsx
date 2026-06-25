@@ -175,10 +175,11 @@ export function PourquoiSection() {
                   key={s.label}
                   className={i > 0 ? 'lg:border-l lg:border-white/15' : ''}
                 >
-                  <div className="font-anton text-5xl sm:text-6xl" style={{ color: ACCENT }}>
+                  <div className="font-anton text-5xl sm:text-6xl tabular-nums" style={{ color: ACCENT }}>
                     <ScrollCount value={s.value} decimals={s.decimals ?? 0} suffix={s.suffix} />
                   </div>
-                  <p className="mt-2 text-sm text-white/75">{s.label}</p>
+                  <div className="kpi-rule" />
+                  <p className="spec-label">{s.label}</p>
                 </div>
               ))}
             </div>
@@ -195,8 +196,9 @@ export function PourquoiSection() {
                 >
                   <Icon size={22} />
                 </div>
-                <h3 className="text-lg font-semibold mb-2">{t}</h3>
-                <p className="text-sm text-white/70 leading-relaxed">{d}</p>
+                <h3 className="text-lg font-semibold">{t}</h3>
+                <div className="mt-2.5 mb-3 h-px w-8" style={{ background: `${ACCENT}aa` }} />
+                <p className="card-sub">{d}</p>
               </div>
             </Reveal>
           ))}
@@ -413,7 +415,7 @@ export function RdvSection() {
                   <blockquote className="mt-1 text-sm text-white/80 leading-relaxed">
                     “{r.text}”
                   </blockquote>
-                  <figcaption className="mt-1 text-xs text-white/45">{r.author}</figcaption>
+                  <figcaption className="mt-2 spec-label spec-label--tick">{r.author}</figcaption>
                 </figure>
               ))}
             </div>
