@@ -10,11 +10,12 @@ import {
 const PANEL_IDS = ['entretien', 'tarifs', 'avis', 'avis2', 'process']
 const PANEL_COUNT = PANEL_IDS.length
 
-// Scroll-progress of each panel's peak. Small TAIL so the LAST rubrique stays
-// visible right up to the end of the region — it then crossfades out with the
-// video as the brand marquee enters (no dead "video-only" scroll gap).
+// Scroll-progress of each panel's peak. TAIL reserves scroll at the end so the
+// LAST rubrique fades fully to 0 BEFORE the region exits — otherwise the fixed
+// panel overlaps the brand marquee / next section as they scroll up. Tuned so
+// the card is gone by ~95% (clean "card off → logos" sequence, minimal gap).
 const LEAD = 0.12
-const TAIL = 0.05
+const TAIL = 0.14
 function panelCenter(i: number, n: number) {
   if (n <= 1) return 0.5
   return LEAD + (i / (n - 1)) * (1 - LEAD - TAIL)
