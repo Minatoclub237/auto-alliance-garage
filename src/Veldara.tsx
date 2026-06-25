@@ -53,6 +53,28 @@ export default function VeldaraSection({
     let rafParticles = 0
     let lastSection = ''
 
+    // ---- Scroll-scrubbed video: drive currentTime from scroll. Works on PC
+    //      AND mobile, and initialises itself. A one-time muted play()/pause()
+    //      "kick" forces iOS to render frames so seeking displays.
+    let videoReady = false
+    let seeking = false
+    videoEl.addEventListener('loadedmetadata', () => {
+      videoReady = isFinite(videoEl.duration) && videoEl.duration > 0
+    })
+    videoEl.addEventListener('seeked', () => {
+      seeking = false
+    })
+    videoEl.addEventListener('loadeddata', () => {
+      try {
+        videoEl.currentTime = 0
+      } catch {
+        /* ignore */
+      }
+      // Kick playback once (muted) then pause, so the first frame paints.
+      videoEl.play().then(() => videoEl.pause()).catch(() => {})
+    })
+    videoEl.load()
+
     // ---- Region progress relative to this section (composes under the hero).
     function getRegion() {
       const rect = wrap.getBoundingClientRect()
@@ -101,20 +123,26 @@ export default function VeldaraSection({
       const { progress, opacity } = getRegion()
       videoContainer.style.opacity = String(opacity)
       pCanvas.style.opacity = String(opacity)
-
-      // Play the looping video only while the region is on screen.
-      const nowVisible = opacity > 0.001
-      if (nowVisible !== regionVisible) {
-        regionVisible = nowVisible
-        if (regionVisible) videoEl.play().catch(() => {})
-        else videoEl.pause()
-      }
+      regionVisible = opacity > 0.001
 
       if (panelsRef.current) panelsRef.current.style.opacity = String(opacity)
       const dominant = updateRubriques(progress)
       if (opacity > 0.05 && dominant && dominant !== lastSection) {
         lastSection = dominant
         onSection?.('#' + dominant)
+      }
+
+      // Scrub the video to match scroll progress while the region is visible.
+      if (regionVisible && videoReady) {
+        const target = progress * (videoEl.duration - 0.05)
+        if (!seeking && Math.abs(videoEl.currentTime - target) > 0.03) {
+          seeking = true
+          try {
+            videoEl.currentTime = target
+          } catch {
+            seeking = false
+          }
+        }
       }
       rafMain = requestAnimationFrame(mainTick)
     }
@@ -176,13 +204,11 @@ export default function VeldaraSection({
 
   return (
     <div id="veldara" ref={wrapRef}>
-      {/* Looping video background */}
+      {/* Scroll-scrubbed video background */}
       <div className="scroll-video-container" ref={videoContainerRef}>
         <video
           ref={videoElRef}
           src={VIDEO_URL}
-          autoPlay
-          loop
           muted
           playsInline
           preload="auto"
