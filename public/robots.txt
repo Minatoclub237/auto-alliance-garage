@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
 
-# TODO: remplacer par le vrai domaine
-Sitemap: https://www.garage-auto-alliance-lyon.fr/sitemap.xml
+Sitemap: https://auto-alliance-garage.vercel.app/sitemap.xml
