@@ -23,15 +23,14 @@ export default function VideoScrollRegion({
     const update = () => {
       const rect = wrap.getBoundingClientRect()
       const vh = window.innerHeight
-      // Visible only while the region fully covers the viewport (so the fixed
-      // video never shows over the neighbouring sections).
+      // Show only while the region fully covers the viewport (so the fixed
+      // video never shows over the neighbouring sections) — it starts exactly
+      // when the previous section has scrolled above.
       const covering = rect.top <= 1 && rect.bottom >= vh - 1
       bg.style.opacity = covering ? '1' : '0'
-      if (covering) {
-        if (video.paused) video.play().catch(() => {})
-      } else if (!video.paused) {
-        video.pause()
-      }
+      // Keep it playing at all times (never paused on the black first frame),
+      // so it's already running — not black — the moment it becomes visible.
+      if (video.paused) video.play().catch(() => {})
     }
 
     update()
@@ -46,7 +45,7 @@ export default function VideoScrollRegion({
   return (
     <div className="video-scroll" ref={wrapRef}>
       <div className="vs-bg" ref={bgRef}>
-        <video ref={videoRef} src={videoSrc} loop muted playsInline preload="auto" />
+        <video ref={videoRef} src={videoSrc} autoPlay loop muted playsInline preload="auto" />
         <div className="vs-overlay" />
       </div>
       <div className="vs-content">{children}</div>
