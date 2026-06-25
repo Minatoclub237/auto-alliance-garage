@@ -401,12 +401,14 @@ body.has-custom-cursor select {
   color: #fff;
 }
 .video-scroll .vs-bg {
-  position: sticky;
-  top: 0;
-  height: 100vh;
+  position: fixed;
+  inset: 0;
   z-index: 0;
   overflow: hidden;
   background: #0a0a0a;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
 }
 .video-scroll .vs-bg video {
   position: absolute;
@@ -423,7 +425,6 @@ body.has-custom-cursor select {
 .video-scroll .vs-content {
   position: relative;
   z-index: 2;
-  margin-top: -100vh;
   text-shadow: 0 2px 16px rgba(0, 0, 0, 0.55);
 }
 
