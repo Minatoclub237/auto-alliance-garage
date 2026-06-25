@@ -102,6 +102,47 @@ export function CountUp({
   )
 }
 
+/* Number driven by scroll position: it climbs toward `value` as the element
+   travels up the viewport, and follows the scroll back down — never frozen. */
+export function ScrollCount({
+  value,
+  decimals = 0,
+  suffix = '',
+}: {
+  value: number
+  decimals?: number
+  suffix?: string
+}) {
+  const ref = useRef<HTMLSpanElement>(null)
+  const [display, setDisplay] = useState('0')
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const fmt = (v: number) => v.toFixed(decimals).replace('.', ',')
+    const update = () => {
+      const r = el.getBoundingClientRect()
+      const vh = window.innerHeight
+      // 0 when the number sits at the bottom of the viewport, 1 once it has
+      // risen into the upper third — mapped continuously to the scroll.
+      const p = Math.max(0, Math.min(1, (vh - r.top) / (vh * 0.7)))
+      setDisplay(fmt(value * p))
+    }
+    update()
+    window.addEventListener('scroll', update, { passive: true })
+    window.addEventListener('resize', update)
+    return () => {
+      window.removeEventListener('scroll', update)
+      window.removeEventListener('resize', update)
+    }
+  }, [value, decimals])
+  return (
+    <span ref={ref}>
+      {display}
+      {suffix}
+    </span>
+  )
+}
+
 /* Anchor that gently pulls toward the cursor (desktop only). */
 export function Magnetic({
   children,

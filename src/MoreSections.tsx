@@ -9,7 +9,7 @@ import {
   Check,
   Phone,
 } from 'lucide-react'
-import { Reveal, CountUp, Magnetic, ACCENT } from './ui'
+import { Reveal, ScrollCount, Magnetic, ACCENT } from './ui'
 
 const PHONE = '+33472718631'
 const PHONE_DISPLAY = '04 72 71 86 31'
@@ -155,7 +155,7 @@ export function PourquoiSection() {
           {STATS.map((s, i) => (
             <Reveal key={s.label} delay={i * 80}>
               <div className="font-anton text-5xl sm:text-6xl" style={{ color: ACCENT }}>
-                <CountUp value={s.value} decimals={s.decimals ?? 0} suffix={s.suffix} />
+                <ScrollCount value={s.value} decimals={s.decimals ?? 0} suffix={s.suffix} />
               </div>
               <p className="mt-2 text-sm text-white/55">{s.label}</p>
             </Reveal>
