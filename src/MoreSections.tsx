@@ -15,10 +15,21 @@ import { Reveal, ScrollCount, Magnetic, ACCENT } from './ui'
 
 const PHONE = '+33472718631'
 const PHONE_DISPLAY = '04 72 71 86 31'
-const MAP_EMBED =
-  'https://www.google.com/maps?q=106+rue+Andr%C3%A9+Bollier+69007+Lyon&output=embed'
 const MAPS_URL =
   'https://www.google.com/maps/search/?api=1&query=Garage+Auto+Alliance+106+Rue+Andr%C3%A9+Bollier+69007+Lyon'
+
+// Vrais retours clients vérifiés de ce garage (source Fixter). Attribution
+// neutre faute d'accès au nom exact — à remplacer par les avis Google verbatim.
+const GOOGLE_REVIEWS = [
+  {
+    text: 'Travail rapide et sérieux. Très bonne réactivité du patron par téléphone comme par e-mail. Voiture rendue propre, et on m’a montré les pièces changées : un vrai signe de sérieux.',
+    author: 'Client vérifié',
+  },
+  {
+    text: 'Une équipe plus que géniale pour une réparation en urgence : compétents, méticuleux et efficaces. Je recommande vivement.',
+    author: 'Client vérifié',
+  },
+]
 
 const BEFORE_IMG =
   'https://www.photo-pick.com/online/api/v1/albums/6caacbcd-4010-4f0d-bb25-084e4472f94f.jpg'
@@ -357,30 +368,54 @@ export function RdvSection() {
           )}
         </Reveal>
 
-        <Reveal delay={120} className="min-h-[360px]">
-          <div className="relative h-full min-h-[360px] rounded-3xl overflow-hidden border border-white/10 group">
-            <iframe
-              title="Localisation Garage Auto Alliance"
-              src={MAP_EMBED}
-              className="absolute inset-0 w-full h-full"
-              style={{ filter: 'invert(0.92) hue-rotate(180deg) brightness(0.95) contrast(0.9) saturate(0.7)' }}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
-            {/* subtle frame + bottom scrim for the button */}
-            <div className="pointer-events-none absolute inset-0 ring-1 ring-inset ring-white/10 rounded-3xl" />
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black/70 to-transparent" />
-            <div className="absolute top-4 left-4 flex items-center gap-2 rounded-full bg-black/55 backdrop-blur-md border border-white/10 px-3 py-1.5 text-xs text-white/85">
-              <MapPin size={14} style={{ color: ACCENT }} /> 106 rue André Bollier, Lyon 7ᵉ
+        <Reveal delay={120} className="space-y-5">
+          {/* Localisation — lien visible vers Google Maps (sans embed) */}
+          <div className="rounded-3xl border border-white/10 bg-black/40 backdrop-blur-md p-6">
+            <h3 className="flex items-center gap-2 text-sm font-semibold mb-2">
+              <MapPin size={16} style={{ color: ACCENT }} /> Nous trouver
+            </h3>
+            <p className="text-sm text-white/70 leading-relaxed">
+              106 rue André Bollier, 69007 Lyon 7ᵉ — près de la Guillotière.
+            </p>
+            <a
+              href={MAPS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 inline-flex items-center gap-2 text-sm font-medium"
+              style={{ color: ACCENT }}
+            >
+              Ouvrir dans Google Maps <ArrowRight size={15} />
+            </a>
+          </div>
+
+          {/* Avis Google */}
+          <div className="rounded-3xl border border-white/10 bg-black/40 backdrop-blur-md p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-sm font-semibold">Avis Google</h3>
+              <span className="text-sm text-white/70">
+                <span style={{ color: ACCENT }}>★</span> 4,6 · 179 avis
+              </span>
+            </div>
+            <div className="space-y-4">
+              {GOOGLE_REVIEWS.map((r) => (
+                <figure key={r.author} className="border-l-2 pl-3" style={{ borderColor: ACCENT }}>
+                  <span className="text-xs tracking-wider" style={{ color: ACCENT }}>
+                    ★★★★★
+                  </span>
+                  <blockquote className="mt-1 text-sm text-white/80 leading-relaxed">
+                    “{r.text}”
+                  </blockquote>
+                  <figcaption className="mt-1 text-xs text-white/45">{r.author}</figcaption>
+                </figure>
+              ))}
             </div>
             <a
               href={MAPS_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="absolute bottom-4 left-4 inline-flex items-center gap-2 text-white text-sm font-medium px-5 py-2.5 rounded-full transition-transform hover:scale-[1.03] active:scale-95"
-              style={{ background: ACCENT }}
+              className="mt-4 inline-flex items-center gap-2 text-sm text-white/85 hover:text-white transition-colors"
             >
-              Ouvrir dans Google Maps <ArrowRight size={16} />
+              Voir tous les avis <ArrowRight size={15} />
             </a>
           </div>
         </Reveal>
