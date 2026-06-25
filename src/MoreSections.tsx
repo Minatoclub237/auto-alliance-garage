@@ -140,7 +140,7 @@ const GUARANTEES = [
 
 export function PourquoiSection() {
   return (
-    <section id="pourquoi" className="scroll-mt-24 bg-[#0a0a0a] text-white py-24 sm:py-32 px-6">
+    <section id="pourquoi" className="scroll-mt-24 bg-transparent text-white py-24 sm:py-32 px-6">
       <div className="max-w-6xl mx-auto">
         <Reveal className="text-center flex flex-col items-center">
           <p className="font-script text-3xl mb-1" style={{ color: ACCENT }}>
@@ -165,7 +165,7 @@ export function PourquoiSection() {
         <div className="mt-16 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {GUARANTEES.map(({ icon: Icon, t, d }, i) => (
             <Reveal key={t} delay={i * 80}>
-              <div className="bg-white/[0.03] border border-white/10 rounded-3xl p-7 h-full">
+              <div className="bg-black/40 backdrop-blur-md border border-white/10 rounded-3xl p-7 h-full">
                 <div
                   className="w-12 h-12 rounded-2xl flex items-center justify-center mb-5"
                   style={{ background: `${ACCENT}1a`, color: ACCENT }}
@@ -196,7 +196,7 @@ const FAQS = [
 export function FaqSection() {
   const [open, setOpen] = useState<number | null>(0)
   return (
-    <section id="faq" className="scroll-mt-24 bg-[#060606] text-white py-24 sm:py-32 px-6">
+    <section id="faq" className="scroll-mt-24 bg-transparent text-white py-24 sm:py-32 px-6">
       <div className="max-w-3xl mx-auto">
         <Reveal className="text-center flex flex-col items-center mb-12">
           <p className="font-script text-3xl mb-1" style={{ color: ACCENT }}>
@@ -212,7 +212,7 @@ export function FaqSection() {
             const isOpen = open === i
             return (
               <Reveal key={f.q} delay={i * 50}>
-                <div className="border border-white/10 rounded-2xl bg-white/[0.02] overflow-hidden">
+                <div className="border border-white/10 rounded-2xl bg-black/40 backdrop-blur-md overflow-hidden">
                   <button
                     className="w-full flex items-center justify-between gap-4 text-left px-6 py-5"
                     onClick={() => setOpen(isOpen ? null : i)}
@@ -263,7 +263,7 @@ export function RdvSection() {
     setSent(true)
   }
   return (
-    <section id="rdv" className="scroll-mt-24 bg-[#0a0a0a] text-white py-24 sm:py-32 px-6">
+    <section id="rdv" className="scroll-mt-24 bg-transparent text-white py-24 sm:py-32 px-6">
       <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-stretch">
         <Reveal>
           <p className="font-script text-3xl mb-1" style={{ color: ACCENT }}>
@@ -274,7 +274,7 @@ export function RdvSection() {
           </h2>
 
           {sent ? (
-            <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-8">
+            <div className="rounded-3xl border border-white/10 bg-black/40 backdrop-blur-md p-8">
               <div
                 className="w-12 h-12 rounded-full flex items-center justify-center mb-4"
                 style={{ background: ACCENT }}

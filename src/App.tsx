@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Menu, X } from 'lucide-react'
 import VeldaraSection from './Veldara'
+import VideoScrollRegion from './VideoScrollRegion'
 import { GarageFooter } from './Sections'
 import {
   MarqueeSection,
@@ -331,9 +332,12 @@ entre de bonnes mains
 
       <MarqueeSection />
       <CarrosserieSection />
-      <PourquoiSection />
-      <FaqSection />
-      <RdvSection />
+
+      <VideoScrollRegion videoSrc="/garage-scroll-2.mp4">
+        <PourquoiSection />
+        <FaqSection />
+        <RdvSection />
+      </VideoScrollRegion>
 
       <GarageFooter />
 
