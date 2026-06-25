@@ -1,9 +1,9 @@
 import { useEffect, useRef, type ReactNode } from 'react'
 
-/* Cinematic region: a looping background video, FIXED to the viewport (same as
-   the first video region) so backdrop-filter glass cards frost it correctly.
-   Opacity is gated so it only shows while this region fills the viewport — it
-   never bleeds onto the section above or the footer below. */
+/* Cinematic region: a looping background video, sticky-pinned INSIDE this
+   region. Sticky confines it to the section (never bleeds onto the section
+   above/below) and it plays continuously, so it's never frozen on the black
+   first frame — it's already running the moment the section is in view. */
 export default function VideoScrollRegion({
   videoSrc,
   children,
@@ -12,39 +12,36 @@ export default function VideoScrollRegion({
   children: ReactNode
 }) {
   const wrapRef = useRef<HTMLDivElement>(null)
-  const bgRef = useRef<HTMLDivElement>(null)
   const videoRef = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
     const wrap = wrapRef.current!
-    const bg = bgRef.current!
     const video = videoRef.current!
 
-    const update = () => {
-      const rect = wrap.getBoundingClientRect()
-      const vh = window.innerHeight
-      // Show only while the region fully covers the viewport (so the fixed
-      // video never shows over the neighbouring sections) — it starts exactly
-      // when the previous section has scrolled above.
-      const covering = rect.top <= 1 && rect.bottom >= vh - 1
-      bg.style.opacity = covering ? '1' : '0'
-      // Keep it playing at all times (never paused on the black first frame),
-      // so it's already running — not black — the moment it becomes visible.
-      if (video.paused) video.play().catch(() => {})
-    }
+    // Render a real frame ASAP (avoids a black flash on first reveal).
+    const kick = () => video.play().catch(() => {})
+    video.addEventListener('loadeddata', kick)
 
-    update()
-    window.addEventListener('scroll', update, { passive: true })
-    window.addEventListener('resize', update)
+    // Start playing a bit BEFORE the region is on screen (rootMargin) so it's
+    // already running — not black — when it becomes visible; pause when far.
+    const obs = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) video.play().catch(() => {})
+        else video.pause()
+      },
+      { threshold: 0, rootMargin: '40% 0px 40% 0px' },
+    )
+    obs.observe(wrap)
+
     return () => {
-      window.removeEventListener('scroll', update)
-      window.removeEventListener('resize', update)
+      obs.disconnect()
+      video.removeEventListener('loadeddata', kick)
     }
   }, [videoSrc])
 
   return (
     <div className="video-scroll" ref={wrapRef}>
-      <div className="vs-bg" ref={bgRef}>
+      <div className="vs-bg">
         <video ref={videoRef} src={videoSrc} autoPlay loop muted playsInline preload="auto" />
         <div className="vs-overlay" />
       </div>
