@@ -369,7 +369,7 @@ body.has-custom-cursor select {
   z-index: 5;
 }
 
-/* Reusable cinematic scroll region (2nd video block) */
+/* Looping background-video region (2nd video block) */
 .video-scroll {
   position: relative;
   background: #010101;
@@ -382,9 +382,7 @@ body.has-custom-cursor select {
   background: #0a0a0a;
   opacity: 0;
   pointer-events: none;
-  will-change: opacity;
 }
-.video-scroll .vs-bg canvas,
 .video-scroll .vs-bg video {
   position: absolute;
   inset: 0;
@@ -395,21 +393,12 @@ body.has-custom-cursor select {
 .video-scroll .vs-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.55);
-}
-.video-scroll .vs-particles {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 3;
-  opacity: 0;
-  will-change: opacity;
+  background: rgba(0, 0, 0, 0.22);
 }
 .video-scroll .vs-content {
   position: relative;
   z-index: 2;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.55);
 }
 
 /* Form fields */
