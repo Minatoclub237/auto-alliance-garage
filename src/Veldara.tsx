@@ -53,6 +53,7 @@ export default function VeldaraSection({
     const pCtx = pCanvas.getContext('2d')!
 
     let cancelled = false
+    let regionVisible = false
     let frames: ImageBitmap[] = []
     let framesReady = false
     let lastFrameIndex = -1
@@ -196,6 +197,7 @@ export default function VeldaraSection({
       const { progress, opacity } = getRegion()
       videoContainer.style.opacity = String(opacity)
       pCanvas.style.opacity = String(opacity)
+      regionVisible = opacity > 0.001
       // Gate the whole rubriques layer by the region opacity so panels fade
       // out with the video as the footer scrolls in — no bleed-over.
       if (panelsRef.current) panelsRef.current.style.opacity = String(opacity)
@@ -268,18 +270,21 @@ export default function VeldaraSection({
     }
 
     function animateParticles() {
-      pCtx.clearRect(0, 0, pCanvas.width, pCanvas.height)
-      for (const p of particles) {
-        p.x += p.vx
-        p.y += p.vy
-        if (p.x < 0) p.x = pCanvas.width
-        if (p.x > pCanvas.width) p.x = 0
-        if (p.y < 0) p.y = pCanvas.height
-        if (p.y > pCanvas.height) p.y = 0
-        pCtx.beginPath()
-        pCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2)
-        pCtx.fillStyle = `rgba(255,255,255,${p.opacity})`
-        pCtx.fill()
+      // Skip all canvas work while the region is off-screen.
+      if (regionVisible) {
+        pCtx.clearRect(0, 0, pCanvas.width, pCanvas.height)
+        for (const p of particles) {
+          p.x += p.vx
+          p.y += p.vy
+          if (p.x < 0) p.x = pCanvas.width
+          if (p.x > pCanvas.width) p.x = 0
+          if (p.y < 0) p.y = pCanvas.height
+          if (p.y > pCanvas.height) p.y = 0
+          pCtx.beginPath()
+          pCtx.arc(p.x, p.y, p.size, 0, Math.PI * 2)
+          pCtx.fillStyle = `rgba(255,255,255,${p.opacity})`
+          pCtx.fill()
+        }
       }
       rafParticles = requestAnimationFrame(animateParticles)
     }

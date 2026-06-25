@@ -113,31 +113,39 @@ export function ScrollCount({
   decimals?: number
   suffix?: string
 }) {
-  const ref = useRef<HTMLSpanElement>(null)
-  const [display, setDisplay] = useState('0')
+  const numRef = useRef<HTMLSpanElement>(null)
   useEffect(() => {
-    const el = ref.current
+    const el = numRef.current
     if (!el) return
     const fmt = (v: number) => v.toFixed(decimals).replace('.', ',')
-    const update = () => {
+    let ticking = false
+    const apply = () => {
+      ticking = false
       const r = el.getBoundingClientRect()
       const vh = window.innerHeight
       // 0 when the number sits at the bottom of the viewport, 1 once it has
       // risen into the upper third — mapped continuously to the scroll.
       const p = Math.max(0, Math.min(1, (vh - r.top) / (vh * 0.7)))
-      setDisplay(fmt(value * p))
+      el.textContent = fmt(value * p)
     }
-    update()
-    window.addEventListener('scroll', update, { passive: true })
-    window.addEventListener('resize', update)
+    // Coalesce scroll bursts to one DOM write per frame (no React re-render).
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true
+        requestAnimationFrame(apply)
+      }
+    }
+    apply()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll)
     return () => {
-      window.removeEventListener('scroll', update)
-      window.removeEventListener('resize', update)
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
     }
   }, [value, decimals])
   return (
-    <span ref={ref}>
-      {display}
+    <span>
+      <span ref={numRef}>0</span>
       {suffix}
     </span>
   )

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, type RefObject } from 'react'
 import { Menu, X } from 'lucide-react'
 import VeldaraSection from './Veldara'
 import VideoScrollRegion from './VideoScrollRegion'
@@ -39,26 +39,18 @@ type Pos = { x: number; y: number }
 
 function RevealLayer({
   image,
-  cursorX,
-  cursorY,
-  radius,
+  innerRef,
 }: {
   image: string
-  cursorX: number
-  cursorY: number
-  radius: number
+  innerRef: RefObject<HTMLDivElement>
 }) {
-  // GPU-composited radial-gradient mask — no per-frame canvas re-encoding,
-  // so it stays at 60fps on phones. Pixel-identical to the canvas version.
-  const mask = `radial-gradient(circle ${radius}px at ${cursorX}px ${cursorY}px, ${MASK_STOPS})`
+  // The radial-gradient mask is updated imperatively from App's RAF loop (via
+  // innerRef) so the spotlight never triggers a React re-render of the page.
   return (
     <div
+      ref={innerRef}
       className="absolute inset-0 hero-bg bg-cover bg-no-repeat z-30 pointer-events-none hero-zoom"
-      style={{
-        backgroundImage: `url(${image})`,
-        maskImage: mask,
-        WebkitMaskImage: mask,
-      }}
+      style={{ backgroundImage: `url(${image})` }}
     />
   )
 }
@@ -156,8 +148,8 @@ export default function App() {
   const rafRef = useRef<number>(0)
   const lastInteract = useRef<number>(-99999)
   const seeded = useRef<boolean>(false)
-  const [cursorPos, setCursorPos] = useState<Pos>({ x: -999, y: -999 })
-  const [radius, setRadius] = useState<number>(SPOTLIGHT_R)
+  const revealRef = useRef<HTMLDivElement>(null)
+  const radiusRef = useRef<number>(SPOTLIGHT_R)
   const [active, setActive] = useState<string>('#accueil')
 
   // Scrollspy for the normal-flow sections. The in-video rubriques
@@ -194,8 +186,9 @@ export default function App() {
     ).matches
 
     // Scale the spotlight to the screen so it never swallows a small phone.
-    const computeRadius = () =>
-      setRadius(Math.max(150, Math.min(SPOTLIGHT_R, window.innerWidth * 0.5)))
+    const computeRadius = () => {
+      radiusRef.current = Math.max(150, Math.min(SPOTLIGHT_R, window.innerWidth * 0.5))
+    }
     computeRadius()
     window.addEventListener('resize', computeRadius)
 
@@ -240,7 +233,12 @@ export default function App() {
       }
       smooth.current.x += (mouse.current.x - smooth.current.x) * 0.1
       smooth.current.y += (mouse.current.y - smooth.current.y) * 0.1
-      setCursorPos({ x: smooth.current.x, y: smooth.current.y })
+      const el = revealRef.current
+      if (el) {
+        const m = `radial-gradient(circle ${radiusRef.current}px at ${smooth.current.x}px ${smooth.current.y}px, ${MASK_STOPS})`
+        el.style.maskImage = m
+        el.style.setProperty('-webkit-mask-image', m)
+      }
       rafRef.current = requestAnimationFrame(loop)
     }
     rafRef.current = requestAnimationFrame(loop)
@@ -273,12 +271,7 @@ export default function App() {
         />
 
         {/* 2. Reveal layer */}
-        <RevealLayer
-          image={BG_IMAGE_2}
-          cursorX={cursorPos.x}
-          cursorY={cursorPos.y}
-          radius={radius}
-        />
+        <RevealLayer image={BG_IMAGE_2} innerRef={revealRef} />
 
         {/* 3. Heading */}
         <div className="absolute top-[14%] left-0 right-0 flex flex-col items-center text-center px-5 pointer-events-none z-50">
