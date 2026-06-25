@@ -166,29 +166,37 @@ export function PourquoiSection() {
           </h2>
         </Reveal>
 
-        <div className="mt-14 grid grid-cols-2 lg:grid-cols-4 gap-6 text-center">
-          {STATS.map((s, i) => (
-            <Reveal key={s.label} delay={i * 80}>
-              <div className="font-anton text-5xl sm:text-6xl" style={{ color: ACCENT }}>
-                <ScrollCount value={s.value} decimals={s.decimals ?? 0} suffix={s.suffix} />
-              </div>
-              <p className="mt-2 text-sm text-white/55">{s.label}</p>
-            </Reveal>
-          ))}
-        </div>
-
-        <div className="mt-16 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          {GUARANTEES.map(({ icon: Icon, t, d }, i) => (
-            <Reveal key={t} delay={i * 80}>
-              <div className="bg-black/40 backdrop-blur-md border border-white/10 rounded-3xl p-7 h-full">
+        {/* KPI stats inside one liquid-glass card */}
+        <Reveal className="mt-14">
+          <div className="glass-card mx-auto max-w-4xl px-6 py-9 sm:px-10 sm:py-11">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-y-9 text-center">
+              {STATS.map((s, i) => (
                 <div
-                  className="w-12 h-12 rounded-2xl flex items-center justify-center mb-5"
-                  style={{ background: `${ACCENT}1a`, color: ACCENT }}
+                  key={s.label}
+                  className={i > 0 ? 'lg:border-l lg:border-white/15' : ''}
+                >
+                  <div className="font-anton text-5xl sm:text-6xl" style={{ color: ACCENT }}>
+                    <ScrollCount value={s.value} decimals={s.decimals ?? 0} suffix={s.suffix} />
+                  </div>
+                  <p className="mt-2 text-sm text-white/75">{s.label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Reveal>
+
+        <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {GUARANTEES.map(({ icon: Icon, t, d }, i) => (
+            <Reveal key={t} delay={i * 90}>
+              <div className="glass-tile rounded-3xl p-7 h-full" data-cursor>
+                <div
+                  className="w-12 h-12 rounded-2xl flex items-center justify-center mb-5 transition-transform duration-300"
+                  style={{ background: `${ACCENT}26`, color: ACCENT }}
                 >
                   <Icon size={22} />
                 </div>
                 <h3 className="text-lg font-semibold mb-2">{t}</h3>
-                <p className="text-sm text-white/55 leading-relaxed">{d}</p>
+                <p className="text-sm text-white/70 leading-relaxed">{d}</p>
               </div>
             </Reveal>
           ))}
