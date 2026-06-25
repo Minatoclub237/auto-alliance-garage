@@ -62,7 +62,7 @@ const PRAISE = ['Accueil', 'Rapidité', 'Transparence', 'Travail soigné']
 export function EntretienPanel() {
   return (
     <div className="rubrique" data-side="left">
-      <div className="rubrique-inner bg-black/35 backdrop-blur-md border border-white/10 rounded-3xl p-8">
+      <div className="rubrique-inner glass rounded-3xl p-8">
         <p className="font-script text-3xl mb-1" style={{ color: ACCENT }}>
           Nos prestations
         </p>
@@ -120,7 +120,7 @@ export function EntretienPanel() {
 export function TarifsPanel() {
   return (
     <div className="rubrique" data-side="right">
-      <div className="rubrique-inner bg-black/35 backdrop-blur-md border border-white/10 rounded-3xl p-8">
+      <div className="rubrique-inner glass rounded-3xl p-8">
         <p className="font-script text-3xl mb-1" style={{ color: ACCENT }}>
           Tarifs
         </p>
@@ -169,7 +169,7 @@ export function TarifsPanel() {
 export function AvisPanel() {
   return (
     <div className="rubrique" data-side="left">
-      <div className="rubrique-inner bg-black/35 backdrop-blur-md border border-white/10 rounded-3xl p-8">
+      <div className="rubrique-inner glass rounded-3xl p-8">
         <p className="font-script text-3xl mb-1" style={{ color: ACCENT }}>
           Avis clients
         </p>
@@ -215,7 +215,7 @@ export function AvisPanel() {
 export function AvisPanel2() {
   return (
     <div className="rubrique" data-side="right">
-      <div className="rubrique-inner bg-black/35 backdrop-blur-md border border-white/10 rounded-3xl p-8">
+      <div className="rubrique-inner glass rounded-3xl p-8">
         <p className="font-script text-3xl mb-1" style={{ color: ACCENT }}>
           Encore un mot
         </p>
@@ -254,7 +254,7 @@ const STEPS = [
 export function ProcessPanel() {
   return (
     <div className="rubrique" data-side="center">
-      <div className="rubrique-inner rubrique-wide bg-black/35 backdrop-blur-md border border-white/10 rounded-3xl p-8 sm:p-10">
+      <div className="rubrique-inner rubrique-wide glass rounded-3xl p-8 sm:p-10">
         <p className="font-script text-3xl mb-1 text-center" style={{ color: ACCENT }}>
           Simple et transparent
         </p>

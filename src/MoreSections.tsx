@@ -261,7 +261,7 @@ export function FaqSection() {
             const isOpen = open === i
             return (
               <Reveal key={f.q} delay={i * 50}>
-                <div className="border border-white/10 rounded-2xl bg-black/40 backdrop-blur-md overflow-hidden">
+                <div className="glass rounded-2xl overflow-hidden">
                   <button
                     className="w-full flex items-center justify-between gap-4 text-left px-6 py-5"
                     onClick={() => setOpen(isOpen ? null : i)}
@@ -323,7 +323,7 @@ export function RdvSection() {
           </h2>
 
           {sent ? (
-            <div className="rounded-3xl border border-white/10 bg-black/40 backdrop-blur-md p-8">
+            <div className="glass rounded-3xl p-8">
               <div
                 className="w-12 h-12 rounded-full flex items-center justify-center mb-4"
                 style={{ background: ACCENT }}
@@ -378,7 +378,7 @@ export function RdvSection() {
 
         <Reveal delay={120} className="space-y-5">
           {/* Localisation — lien visible vers Google Maps (sans embed) */}
-          <div className="rounded-3xl border border-white/10 bg-black/40 backdrop-blur-md p-6">
+          <div className="glass rounded-3xl p-6">
             <h3 className="flex items-center gap-2 text-sm font-semibold mb-2">
               <MapPin size={16} style={{ color: ACCENT }} /> Nous trouver
             </h3>
@@ -397,7 +397,7 @@ export function RdvSection() {
           </div>
 
           {/* Avis Google */}
-          <div className="rounded-3xl border border-white/10 bg-black/40 backdrop-blur-md p-6">
+          <div className="glass rounded-3xl p-6">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-sm font-semibold">Avis Google</h3>
               <span className="text-sm text-white/70">
