@@ -188,13 +188,39 @@ export function PourquoiSection() {
 }
 
 /* ===================== FAQ ===================== */
+// Questions phrased the way people actually search (local + price + service
+// intent), with self-contained, citable answers (name + address + phone) —
+// optimised for SEO rich results and AI answer engines (GEO). Kept in sync
+// with the FAQPage JSON-LD in index.html.
 const FAQS = [
-  { q: 'Faut-il prendre rendez-vous ?', a: 'C’est conseillé pour être pris en charge rapidement, mais nous accueillons aussi les urgences selon disponibilité. Appelez-nous au ' + PHONE_DISPLAY + '.' },
-  { q: 'Travaillez-vous toutes les marques ?', a: 'Oui. En tant qu’atelier Eurorepar, nous entretenons et réparons tous les véhicules, toutes marques, essence comme diesel et hybrides.' },
-  { q: 'Le devis est-il payant ?', a: 'Non, le devis est gratuit et sans engagement. Le coût d’un diagnostic électronique est déduit si vous nous confiez la réparation.' },
-  { q: 'Proposez-vous un véhicule de prêt ?', a: 'Oui, sur demande et selon disponibilité, afin que vous restiez mobile pendant l’immobilisation de votre voiture.' },
-  { q: 'Mon entretien chez vous préserve-t-il la garantie ?', a: 'Absolument. L’entretien réalisé dans notre atelier respecte le carnet et préserve la garantie constructeur.' },
-  { q: 'Où êtes-vous et quels sont les horaires ?', a: '106 rue André Bollier, 69007 Lyon. Ouvert du lundi au jeudi de 7h30 à 18h30 et le vendredi matin de 9h00 à 12h00.' },
+  {
+    q: 'Où se trouve le Garage Auto Alliance et comment le contacter ?',
+    a: 'Le Garage Auto Alliance est situé au 106 rue André Bollier, dans le 7ᵉ arrondissement de Lyon (69007), près de la Guillotière. Vous pouvez nous joindre au ' + PHONE_DISPLAY + ' ou prendre rendez-vous via le formulaire en ligne.',
+  },
+  {
+    q: 'Quels services proposez-vous à Lyon 7ᵉ ?',
+    a: 'Nous assurons l’entretien et la réparation toutes marques : révision, vidange, freinage, distribution, climatisation, pneumatiques et diagnostic électronique, ainsi que la carrosserie (débosselage, peinture au teintier, châssis, pare-brise). Un véhicule de prêt est disponible sur demande.',
+  },
+  {
+    q: 'Travaillez-vous toutes les marques de véhicules ?',
+    a: 'Oui. En tant qu’atelier du réseau Eurorepar, nous entretenons et réparons tous les véhicules, toutes marques, qu’ils soient essence, diesel ou hybrides — l’entretien préserve la garantie constructeur.',
+  },
+  {
+    q: 'Combien coûte une vidange ou une révision ?',
+    a: 'À titre indicatif, une vidange avec filtre démarre à 79 € et une révision complète à 149 € (pièces et main-d’œuvre incluses). Chaque intervention fait l’objet d’un devis gratuit et personnalisé selon votre véhicule.',
+  },
+  {
+    q: 'Le devis est-il gratuit ?',
+    a: 'Oui, le devis est gratuit et sans engagement. Le coût d’un diagnostic électronique est déduit de la facture si vous nous confiez la réparation.',
+  },
+  {
+    q: 'Faites-vous la carrosserie après un accident ?',
+    a: 'Oui. Notre atelier carrosserie réalise le débosselage, le redressage de châssis, le remplacement de pare-brise et la peinture au teintier pour une finition d’origine, toutes marques.',
+  },
+  {
+    q: 'Quels sont vos horaires et comment prendre rendez-vous ?',
+    a: 'Le garage est ouvert du lundi au jeudi de 7h30 à 18h30 et le vendredi de 9h00 à 12h00 (fermé le week-end). Pour un rendez-vous, appelez le ' + PHONE_DISPLAY + ' ou utilisez le formulaire de prise de rendez-vous du site.',
+  },
 ]
 
 export function FaqSection() {
